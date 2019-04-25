@@ -102,7 +102,6 @@ function displayRepositories(response) {
 
 function searchRepositories() {
   const searchTerm = $("#searchTerms").val();
-  // console.log(`requested: ${searchTerm}`)
   $.get(`https://api.github.com/search/repositories?q=${searchTerm}`, response => {
     // displayRepositories(response)
     $("#results").html(displayRepositories(response));
@@ -110,9 +109,7 @@ function searchRepositories() {
 };
 
 function displayCommits(response) {
-  // list the SHA, the author, the author's login, and the author's avatar as an image
-// console.log(response)
-  const commitList = response.map(commit => {
+  return  response.map(commit => {
     return `
       <div>
         <h3>${commit.sha}</h3>
@@ -121,11 +118,7 @@ function displayCommits(response) {
         <p>${commit.commit.message}</p>
       </div>
       `
-      // <li><h3>${commit.sha}</h3><p>${commit.commit.message}</p></li>
   }).join('');
-
-  return commitList;
-
 };
 
 function showCommits(repo) {
